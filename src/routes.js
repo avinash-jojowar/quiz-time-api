@@ -3,21 +3,21 @@ const router = express.Router()
 const Question = require('./models/Question')
 
 // getting all questions
-router.get('/questions', async (res, req) => {
+router.get('/questions', async (req, res) => {
 	try {
 		const questions = await Question.find()
-		return res.status(200).json(question)
+		return res.status(200).json(questions)
 	}catch (error) {
 		return res.status(500).json({"error": error})
 	}
 })
 
 // getting only one question
-router.get('/questions:id', async (req, res) => {
+router.get('/questions/:id', async (req, res) => {
 	try {
 		const _id = req.params.id
 
-		const questoin = await Question.findOne({_id})
+		const question = await Question.findOne({_id})
 
 		if(!question) {
 			return res.status(404).json({})
